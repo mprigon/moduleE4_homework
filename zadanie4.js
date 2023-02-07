@@ -1,4 +1,14 @@
-// функция - конструктор объектов родительского класса прибора
+// реализовать консольное приложение (пример в модуле).
+// Реализовать на прототипах. Определить иерархию электроприборов. Включить некоторые
+// в розетку. Посчитать потребляемую мощность. Минимум - два прибора.
+//
+// определить родительскую функцию с методами, которые вкл. и выкл прибор из розетки.
+// создать делегирующую связь Prototype для двух конкретных приборов.
+// у каждого прибора должны быть собственные свойства и, желательно, методы, отличные
+// от родительских методов. Создать экземпляры каждого прибора. Вывести в консоль.
+// 
+
+// функция - конструктор объектов родительского класса электроприбора
 function HomeAppliance(name) {
     this.name = name;
     this.voltage = 220;
@@ -10,11 +20,13 @@ function HomeAppliance(name) {
 HomeAppliance.prototype.switchOn = function(timeOn) {
     this.timeOn = timeOn;
     this.switchedOn = true;
+    console.log(`${this.name} is switched on`);
 }
 
 HomeAppliance.prototype.switchOff = function(timeOff) {
     this.timeOff = timeOff;
     this.switchedOn = false;
+    console.log(`${this.name} is switched off`);
 }
 
 // расчет мощности, потребляемой прибором
@@ -22,7 +34,7 @@ HomeAppliance.prototype.getConsumption = function(power) {
     this.power = power;
     this.timeOnHours = this.timeOff - this.timeOn;
     this.myConsumption = this.power * this.timeOnHours;
-    console.log(`appliance consumption is ${this.myConsumption} W`);
+    console.log(`${this.name} consumption is ${this.myConsumption} W`);
 }
 
 function TableLamp(name, colour) {
@@ -39,16 +51,18 @@ function Computer(name) {
 }
 }
 
-function Notebook(name) {
+function Notebook(name, operatingSystem) {
     this.name = name;
+    this.operatingSystem = operatingSystem
     this.autonomy = true;
     this.skillFactoryStudy = function() {
         console.log(`Изучаем модуль Е4 на ${this.name}`);
     }
 }
 
-function Tablet(name) {
+function Tablet(name, operatingSystem) {
     this.name = name;
+    this.operatingSystem = operatingSystem;
     this.touchScreen = true;
     this.playMusic = function() {
         console.log(`${this.name} plays music`)
@@ -83,8 +97,8 @@ Notebook.prototype.getConsumption = function(power, timeOnBattery) {
 
 let lamp = new TableLamp("Soft lamp", "yellow");
 let comp1 = new Computer("Server desktop");
-let notebook1 = new Notebook("Dell notebook", true);
-let tablet1 = new Tablet("Samsung tablet", true);
+let notebook1 = new Notebook("Dell notebook", "Linux");
+let tablet1 = new Tablet("Samsung tablet", "Android");
 
 lamp.switchOn(2);
 comp1.switchOn(0);

@@ -1,3 +1,5 @@
+// задание 5: переписать консольное приложение zadanie4.js на классы
+
 // родительский класс прибора
 class HomeAppliance {
     constructor(name) {
@@ -8,16 +10,19 @@ class HomeAppliance {
     switchOn(timeOn) {
         this.timeOn = timeOn;
         this.switchedOn = true;
+        console.log(`${this.name} is switched on`);
     }
+
     switchOff(timeOff) {
         this.timeOff = timeOff;
         this.switchedOn = false;
+        console.log(`${this.name} is switched off`);
     }
     getConsumption(power) {
         this.power = power;
         this.timeOnHours = this.timeOff - this.timeOn;
         this.myConsumption = this.power * this.timeOnHours;
-        console.log(`appliance consumption is ${this.myConsumption} W`);
+        console.log(`${this.name} consumption is ${this.myConsumption} W`);
     }
 }
 
@@ -44,9 +49,10 @@ class Computer extends HomeAppliance {
 }
 
 class Notebook extends Computer {
-    constructor(name) {
+    constructor(name, operatingSystem) {
         super(name);
         this.name = name;
+        this.operatingSystem = operatingSystem;
         this.autonomy = true;
     }
 
@@ -69,9 +75,10 @@ class Notebook extends Computer {
  
 
 class Tablet extends Notebook {
-    constructor(name) {
+    constructor(name, operatingSystem) {
         super(name);
         this.name = name;
+        this.operatingSystem = operatingSystem;
     }
     playMusic = function() {
         console.log(`${this.name} plays music`)
@@ -84,8 +91,8 @@ class Tablet extends Notebook {
 
 let lamp = new TableLamp("Soft lamp", "yellow");
 let comp1 = new Computer("Server desktop");
-let notebook1 = new Notebook("Dell notebook", true);
-let tablet1 = new Tablet("Samsung tablet", true);
+let notebook1 = new Notebook("Dell notebook", "Linux");
+let tablet1 = new Tablet("Samsung tablet", "Android");
 
 lamp.switchOn(2);
 comp1.switchOn(0);
